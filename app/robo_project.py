@@ -104,6 +104,14 @@ if __name__ == "__main__":
     else:
         recommend = "Buy! The Stock Risk is within the preferred range."
     
+# Last message for user 
+    lastmessage = " "
+    if (float(latest_close) - float(recent_low))/float(recent_low) > risk_percentage:
+        lastmessage = "You could try a different investment"
+    else: 
+        lastmessage = "Happy Investing!"
+
+
 # Displaying results 
     print("-------------------------")
     print(f"Stock: {ticker_symbol}")
@@ -118,7 +126,7 @@ if __name__ == "__main__":
     print("-------------------------")
     print(f"Recommendation with explanation: {recommend} ")
     print("-------------------------")
-    print(f"WRITING DATA TO CSV: {csv_file_path}...")
+    print(f"Writing Data to CSV: {csv_file_path}...")
     print("-------------------------")
-    print("HAPPY INVESTING!")
+    print(lastmessage)
     print("-------------------------")
