@@ -81,49 +81,44 @@ if __name__ == "__main__":
 #
 
 #Latest day & Latest Close 
-parsed_response = get_response(ticker_symbol)
-last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
-row = transform_response(parsed_response)
-latest_close = row[0]["close"]
+    parsed_response = get_response(ticker_symbol)
+    last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
+    row = transform_response(parsed_response)
+    latest_close = row[0]["close"]
 
 # Recent High and Recent Low Prices 
-high_prices = [r["high"] for r in row] 
-low_prices = [r["low"] for r in row] 
-recent_high = max(high_prices)
-recent_low = min(low_prices)
+    high_prices = [r["high"] for r in row] 
+    low_prices = [r["low"] for r in row] 
+    recent_high = max(high_prices)
+    recent_low = min(low_prices)
 
 # Writing to CSV file 
-csv_file_path = os.path.join(os.path.dirname(__file__),"..","data","prices.csv")
-write_to_csv(row, csv_file_path)
+    csv_file_path = os.path.join(os.path.dirname(__file__),"..","data","prices.csv")
+    write_to_csv(row, csv_file_path)
 
-#
-
-
-symbol = "IBM" # accept user input 
-
-
-
-
-# breakpoint()
-
-
-
-
-print("-------------------------")
-print("Stock: XYZ")
-print("-------------------------")
-print("Fetching stock market Data...")
-print("Requested at: 2018-02-20 02:00pm")
-print("-------------------------")
-print(f"Latest Data from: {last_refreshed}")
-print(f"Latest closing price: {to_usd(float(latest_close))}")
-print(f"Recent High: {to_usd(float(recent_high))}")
-print(f"Recent Low: {to_usd(float(recent_low))}")
-print("-------------------------")
-print("RECOMMENDATION: BUY!")
-print("RECOMMENDATION REASON: TODO")
-print("-------------------------")
-print(f"WRITING DATA TO CSV: {csv_file_path}...")
-print("-------------------------")
-print("HAPPY INVESTING!")
-print("-------------------------")
+# Calculating recommendation based on the user risk tolerance
+    recommend = " "
+    risk_percentage = float(acceptable_risk)/20
+    if (float(latest_close) - float(recent_low))/float(recent_low) > risk_percentage:
+        recommend = "Do not buy. Stock risk is higher than desired."
+    else:
+        recommend = "Buy! The Stock Risk is within the preferred range."
+    
+# Displaying results 
+    print("-------------------------")
+    print("Stock: XYZ")
+    print("-------------------------")
+    print("Fetching stock market Data...")
+    print("Requested at: 2018-02-20 02:00pm")
+    print("-------------------------")
+    print(f"Latest Data from: {last_refreshed}")
+    print(f"Latest closing price: {to_usd(float(latest_close))}")
+    print(f"Recent High: {to_usd(float(recent_high))}")
+    print(f"Recent Low: {to_usd(float(recent_low))}")
+    print("-------------------------")
+    print(f"Recommendation with explanation: {recommend} ")
+    print("-------------------------")
+    print(f"WRITING DATA TO CSV: {csv_file_path}...")
+    print("-------------------------")
+    print("HAPPY INVESTING!")
+    print("-------------------------")
