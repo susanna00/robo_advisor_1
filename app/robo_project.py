@@ -18,10 +18,10 @@ def to_usd(my_price):
     return"${0:,.2f}".format(my_price)
 
 # Compiling request URLs
-url_lookup = ""
+request_url = ""
 def compile_url(ticker_input):
-    url_lookup = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker_input}&apikey={api_key}"
-    return url_lookup
+    request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker_input}&apikey={api_key}"
+    return request_url
 
 # Issuing API Requests 
 def get_response(ticker):
