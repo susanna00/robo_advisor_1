@@ -86,26 +86,21 @@ last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
 row = transform_response(parsed_response)
 latest_close = row[0]["close"]
 
-# 
+# Recent High and Recent Low Prices 
+high_prices = [r["high"] for r in row] 
+low_prices = [r["low"] for r in row] 
+recent_high = max(high_prices)
+recent_low = min(low_prices)
+
+
 #
 #
 
 
 symbol = "IBM" # accept user input 
 
-dates = list(tsd.keys())
 
-high_prices = []
-low_prices = []
 
-for date in dates:
-    high_price = tsd[date]["2. high"]
-    high_prices.append(float(high_price))
-    low_price = tsd[date]["3. low"]
-    low_prices.append(float(low_price))
-
-recent_high = max(high_prices)
-recent_low = min(low_prices)
 
 # breakpoint()
 
@@ -121,8 +116,8 @@ print("Requested at: 2018-02-20 02:00pm")
 print("-------------------------")
 print(f"Latest Data from: {last_refreshed}")
 print(f"Latest closing price: {to_usd(float(latest_close))}")
-print(f"RECENT HIGH: {to_usd(float(recent_high))}")
-print(f"RECENT LOW: {to_usd(float(recent_low))}")
+print(f"Recent High: {to_usd(float(recent_high))}")
+print(f"Recent Low: {to_usd(float(recent_low))}")
 print("-------------------------")
 print("RECOMMENDATION: BUY!")
 print("RECOMMENDATION REASON: TODO")
