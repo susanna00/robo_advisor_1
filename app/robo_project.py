@@ -47,7 +47,17 @@ def transform_response(parsed_response):
         rows.append(row)
     return rows
 
-# 
+# Writing to CSV
+def write_to_csv(rows, csv_file_path):
+    csv_headers = ["timestamp", "open", "high", "low", "close", "volume" ]
+    with open(csv_file_path, "w") as csv_file: 
+        writer = csv.DictWriter(csv_file, fieldnames=csv_headers)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(row)
+    return True
+
+
 # 
 # INFO OUTPUTS
 #
@@ -81,13 +91,6 @@ recent_low = min(low_prices)
 
 
 csv_file_path = os.path.join(os.path.dirname(__file__),"..","data","prices.csv")
-
-csv_headers = ["timestamp", "open", "high", "low","close", "volume"]
-
-with open(csv_file_path,"w") as csv_file:
-    writer = csv.DictWriter(csv_file, fieldnames=csv_headers)
-    writer.writeheader()
- 
 
 
 print("-------------------------")
