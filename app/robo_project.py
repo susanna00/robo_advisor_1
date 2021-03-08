@@ -57,11 +57,27 @@ def write_to_csv(rows, csv_file_path):
             writer.writerow(row)
     return True
 
-
+if __name__ == "__main__":
+    #Validations(Prelim)
+    while True:
+        ticker_symbol = input("Please enter a valid ticker symbol of the stock you wish to evaluate (e.g. IBM): ")
+        if not ticker_symbol.isalpha() and len(ticker_symbol) <= 5:
+            print("That doesn't seem a valid stock symbol. Please check the formatting and try again. ")
+        else:
+            get_response(ticker_symbol)
+        if "error" in get_response(ticker_symbol):
+            print("Oh no! I couldn't find any trading data for that stock symbol.Please restart the program and try another one if you'd like.")
+        else:
+            break
+    while True:
+        acceptable_risk = input("How much risk are you willing to accept? Please enter a number between 1 and 10, with 1 being very low risk and 10 being very high risk. ")
+        if 1<= float(acceptable_risk) <= 10 :
+            break 
+        else:
+            print("Sorry, that level of risk is not a valid! Please try again.") 
 # 
 # INFO OUTPUTS
 #
-
 
 
 symbol = "IBM" # accept user input 
