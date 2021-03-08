@@ -17,6 +17,11 @@ api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
 def to_usd(my_price):
     return"${0:,.2f}".format(my_price)
 
+# Compiling request URLs
+url_lookup = ""
+def compile_url(ticker_input):
+    url_lookup = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker_input}&apikey={api_key}"
+    return url_lookup
 #
 # INFO OUTPUTS
 #
@@ -25,7 +30,7 @@ def to_usd(my_price):
 
 symbol = "IBM" # accept user input 
 
-request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}"
+request_url = 
 
 response = requests.get(request_url)
 
