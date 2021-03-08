@@ -131,7 +131,7 @@ if __name__ == "__main__":
     print(lastmessage)
     print("-------------------------")
 
-# Graphical representation of the stock 
+# Graphical representation of the stock, referencing https://github.com/prof-rossetti/intro-to-python/blob/master/notes/python/packages/matplotlib.md 
     while True:
         show_graph = input("Would you like to see a graphical representation of your selected stock's price activity? Please input: Y if you would like to view it, if not input N.")
         if show_graph == "N" or show_graph == "n":
