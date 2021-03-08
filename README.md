@@ -29,7 +29,7 @@ Then navigate there from your command-line application:
 cd ~/Desktop/robo_advisor_1
 ```
 
-As previously pointed out in the prerequisite, you need to create and activate a new virtual environment, called "shopping-env":
+As previously pointed out in the prerequisite, you need to create and activate a new virtual environment, called "stock-env":
 
 ```
 conda create -n stock-env python=3.8
@@ -46,7 +46,8 @@ pip install -r requirements.txt
 
 In the root directory of your local repository, create a new file called ".env", and update the content of the ".env" file to specify your API Key:
 
-    ALPHAVANTAGE_API_KEY= "API Key"
+    ALPHAVANTAGE_API_KEY= "API Key" 
+    #Enter the API Key you previosuly obtained within the quotation marks
 
 # Usage 
 
