@@ -130,3 +130,31 @@ if __name__ == "__main__":
     print("-------------------------")
     print(lastmessage)
     print("-------------------------")
+
+# Graphical representation of the stock 
+    while True:
+        show_graph = input("Would you like to see a graphical representation of your selected stock's price activity? Please input: Y if you would like to view it, if not input N.")
+        if show_graph == "N" or show_graph == "n":
+                break
+        else:
+            if show_graph == "Y" or show_graph == "y":
+                print("Please keep in mind that once you have viewed your results, you need to close the graph window to end the program.") 
+                import matplotlib
+                import matplotlib.pyplot as plt
+                import matplotlib.ticker as ticker
+                plotdates = []
+                dates = [r["timestamp"] for r in row]
+                plotdates = sorted(dates)
+                close_price = [r["close"] for r in row]
+                fig, ax = plt.subplots()
+                ax.xaxis.set_major_locator(plt.LinearLocator(8))                
+                formatter = ticker.FormatStrFormatter('$%1.2f')
+                ax.yaxis.set_major_formatter(formatter)                    
+                plt.plot(plotdates, close_price)
+                plt.xlabel('Date')
+                plt.ylabel('Close Price')
+                plt.title('Closing Stock Prices: ' + ticker_symbol)
+                plt.show()
+                break
+            else:            
+                print("Sorry, your response is invalid. Please input Y or N.")
