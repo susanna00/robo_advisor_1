@@ -1,9 +1,12 @@
 # app/robo_advisor.py file 
+#Inspired by Prof. Rossetti's screencast
 
+import requests 
 import csv
 import json 
 import os
 
+from datetime import datetime 
 from dotenv import load_dotenv 
 import requests
 
