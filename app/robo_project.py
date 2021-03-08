@@ -106,10 +106,10 @@ if __name__ == "__main__":
     
 # Displaying results 
     print("-------------------------")
-    print("Stock: XYZ")
+    print(f"Stock: {ticker_symbol}")
     print("-------------------------")
     print("Fetching stock market Data...")
-    print("Requested at: 2018-02-20 02:00pm")
+    print("Requested at:", datetime.now().strftime('%m-%d-%Y %H:%M:%S'))
     print("-------------------------")
     print(f"Latest Data from: {last_refreshed}")
     print(f"Latest closing price: {to_usd(float(latest_close))}")
