@@ -23,13 +23,32 @@ def compile_url(ticker_input):
     url_lookup = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker_input}&apikey={api_key}"
     return url_lookup
 
-#Issuing API Requests 
+# Issuing API Requests 
 def get_response(ticker):
     this_url = compile_url(ticker)
     response = requests.get(this_url)
     parsed_response = json.loads(response.text)
     return parsed_response
 
+# Processing API Responses 
+def transform_response(parsed_response):
+    tsd = parsed_response["Time Series (Daily)"]
+    rows = []
+
+    for date, daily_prices in tsd.items():
+        row = {
+            "timestamp" : date,
+            "open": float(daily_prices["1. open"]),
+            "high": float(daily_prices["2. high"]),
+            "low": float(daily_prices["3. low"]),
+            "close": float(daily_prices["4. close"]),
+            "volume": int(daily_prices["5. volume"])
+        }
+        rows.append(row)
+    return rows
+
+# 
+# 
 # INFO OUTPUTS
 #
 
@@ -39,7 +58,6 @@ symbol = "IBM" # accept user input
 
 last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
 
-tsd = parsed_response["Time Series (Daily)"]
 
 dates = list(tsd.keys())
 
@@ -69,16 +87,7 @@ csv_headers = ["timestamp", "open", "high", "low","close", "volume"]
 with open(csv_file_path,"w") as csv_file:
     writer = csv.DictWriter(csv_file, fieldnames=csv_headers)
     writer.writeheader()
-    for date in dates:
-        daily_prices = tsd[date]
-        writer.writerow({
-            "timestamp": date,
-            "open": daily_prices["1. open"],
-            "high": daily_prices["2. high"],
-            "low": daily_prices["3. low"],
-            "close": daily_prices["4. close"],
-            "volume": daily_prices["5. volume"]
-        })
+ 
 
 
 print("-------------------------")
