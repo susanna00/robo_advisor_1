@@ -54,7 +54,9 @@ Run the robo advisor script from the command-line:
 
     python app/robo_advisor.py 
 
-
++ Input the ticker symbol of the stock you wish to evaluate 
++ Input the risk you wish to accept 
++ Choose if you wish to obtain a graphical representation of the closing prices activity
 
 ## License:
 
