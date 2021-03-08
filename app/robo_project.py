@@ -92,8 +92,10 @@ low_prices = [r["low"] for r in row]
 recent_high = max(high_prices)
 recent_low = min(low_prices)
 
+# Writing to CSV file 
+csv_file_path = os.path.join(os.path.dirname(__file__),"..","data","prices.csv")
+write_to_csv(row, csv_file_path)
 
-#
 #
 
 
@@ -105,7 +107,6 @@ symbol = "IBM" # accept user input
 # breakpoint()
 
 
-csv_file_path = os.path.join(os.path.dirname(__file__),"..","data","prices.csv")
 
 
 print("-------------------------")
