@@ -1,7 +1,6 @@
 # app/robo_advisor.py file 
 #Inspired by Prof. Rossetti's screencast
 
-import requests 
 import csv
 import json 
 import os
@@ -12,6 +11,9 @@ import requests
 
 load_dotenv()
 
+api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
+
+# Formatting prices to USD dollars 
 def to_usd(my_price):
     return"${0:,.2f}".format(my_price)
 
@@ -19,7 +21,7 @@ def to_usd(my_price):
 # INFO OUTPUTS
 #
 
-api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
+
 
 symbol = "IBM" # accept user input 
 
