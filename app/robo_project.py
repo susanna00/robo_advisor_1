@@ -75,21 +75,25 @@ if __name__ == "__main__":
             break 
         else:
             print("Sorry, that level of risk is not a valid! Please try again.") 
+
+#
+# Information Output 
+#
+
+#Latest day & Latest Close 
+parsed_response = get_response(ticker_symbol)
+last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
+row = transform_response(parsed_response)
+latest_close = row[0]["close"]
+
 # 
-# INFO OUTPUTS
+#
 #
 
 
 symbol = "IBM" # accept user input 
 
-last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
-
-
 dates = list(tsd.keys())
-
-latest_day = dates[0]
-
-latest_close = tsd[latest_day]["4. close"]
 
 high_prices = []
 low_prices = []
@@ -110,13 +114,13 @@ csv_file_path = os.path.join(os.path.dirname(__file__),"..","data","prices.csv")
 
 
 print("-------------------------")
-print("SELECTED SYMBOL: XYZ")
+print("Stock: XYZ")
 print("-------------------------")
-print("REQUESTING STOCK MARKET DATA...")
-print("REQUEST AT: 2018-02-20 02:00pm")
+print("Fetching stock market Data...")
+print("Requested at: 2018-02-20 02:00pm")
 print("-------------------------")
-print(f"LATEST DAY: {last_refreshed}")
-print(f"LATEST CLOSE: {to_usd(float(latest_close))}")
+print(f"Latest Data from: {last_refreshed}")
+print(f"Latest closing price: {to_usd(float(latest_close))}")
 print(f"RECENT HIGH: {to_usd(float(recent_high))}")
 print(f"RECENT LOW: {to_usd(float(recent_low))}")
 print("-------------------------")
